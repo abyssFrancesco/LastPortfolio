@@ -1,26 +1,118 @@
 @import "tailwindcss";
 
+/* Design tokens from requested palette */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Light mode */
+  --bg-page: #F8FAFC; /* slate-50 */
+  --surface: #FFFFFF;
+  --subtle: #F1F5F9; /* slate-100 */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --text-primary: #0F172A; /* slate-900 */
+  --text-secondary: #475569; /* slate-600 */
+  --text-muted: #64748B; /* slate-500 */
+
+  --border-default: #E2E8F0; /* slate-200 */
+  --border-hover: #CBD5E1; /* slate-300 */
+
+  --accent: #4F46E5; /* indigo-600 */
+  --accent-hover: #4338CA; /* indigo-700 */
+  --accent-soft: #EEF2FF; /* indigo-50 */
+
+  /* Dark mode fallbacks (overridden below for dark media or .dark) */
+  --bg-page-dark: #020617; /* slate-950 */
+  --surface-dark: #020617;
+  --text-primary-dark: #F8FAFC;
+  --text-secondary-dark: #CBD5E1;
+  --text-muted-dark: #94A3B8;
+  --border-default-dark: #1E293B;
+  --border-hover-dark: #334155;
+  --accent-dark: #818CF8;
+  --accent-hover-dark: #A5B4FC;
+
+  /* Component tokens default to light */
+  --page-bg: var(--bg-page);
+  --surface-bg: var(--surface);
+  --subtle-bg: var(--subtle);
+  --text-primary-token: var(--text-primary);
+  --text-secondary-token: var(--text-secondary);
+  --text-muted-token: var(--text-muted);
+  --border-token: var(--border-default);
+  --accent-token: var(--accent);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --page-bg: var(--bg-page-dark);
+    --surface-bg: var(--surface-dark);
+    --subtle-bg: var(--surface-dark);
+    --text-primary-token: var(--text-primary-dark);
+    --text-secondary-token: var(--text-secondary-dark);
+    --text-muted-token: var(--text-muted-dark);
+    --border-token: var(--border-default-dark);
+    --accent-token: var(--accent-dark);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Also support Tailwind dark class */
+.dark {
+  --page-bg: var(--bg-page-dark);
+  --surface-bg: var(--surface-dark);
+  --subtle-bg: var(--surface-dark);
+  --text-primary-token: var(--text-primary-dark);
+  --text-secondary-token: var(--text-secondary-dark);
+  --text-muted-token: var(--text-muted-dark);
+  --border-token: var(--border-default-dark);
+  --accent-token: var(--accent-dark);
 }
+
+body {
+  background: var(--page-bg);
+  color: var(--text-primary-token);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Decorative floating shapes */
+.floating-shape {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(36px);
+  opacity: 0.45;
+  transform: translateZ(0);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Convenience helpers tied to design tokens */
+.bg-surface { background: var(--surface-bg); }
+.bg-subtle { background: var(--subtle-bg); }
+.bg-accent { background: var(--accent-token); }
+.bg-accent-soft { background: var(--accent-soft); }
+.text-primary { color: var(--text-primary-token); }
+.text-secondary { color: var(--text-secondary-token); }
+.text-muted { color: var(--text-muted-token); }
+.border-default { border-color: var(--border-token); }
+.border-hover:hover { border-color: var(--border-hover); }
+
+.btn-accent { background: var(--accent-token); color: white; }
+.btn-accent:hover { background: var(--accent-hover); }
+
+.glass-card { background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.3)); backdrop-filter: blur(8px); }
+.dark .glass-card { background: rgba(2,6,23,0.35); }
+
+/* Carousel arrows */
+.carousel-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 40; }
+.carousel-arrow.left { left: 6px; }
+.carousel-arrow.right { right: 6px; }
+
+
