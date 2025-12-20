@@ -41,7 +41,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-zinc-50 to-white dark:from-black dark:to-zinc-900">
+    <div className="min-h-screen">
       <main className="max-w-5xl mx-auto px-6 py-20">
         {/* HERO */}
         <motion.section
@@ -55,7 +55,7 @@ export default function Home() {
             <div className="w-20 h-20 rounded-full bg-gradient-to-br from-indigo-500 to-pink-500 flex items-center justify-center text-white font-semibold text-2xl shadow-2xl">FG</div>
             <div>
               <div className="text-sm text-secondary">Software Developer • Full-stack</div>
-              <h1 className="text-4xl md:text-6xl font-extrabold mt-1 tracking-tight">Ciao, sono <span className="text-accent">Francesco</span></h1>
+              <h1 className="text-4xl md:text-6xl font-extrabold mt-1 tracking-tight">Ciao, sono <span className="text-accent typing">Francesco<span className="blink">|</span></span></h1>
             </div>
           </div>
 

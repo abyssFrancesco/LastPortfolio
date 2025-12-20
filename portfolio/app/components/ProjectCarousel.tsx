@@ -25,12 +25,6 @@ export default function ProjectCarousel() {
 
   const carouselRef = useRef<HTMLDivElement | null>(null);
 
-  function scrollByOffset(offset: number) {
-    const el = carouselRef.current as HTMLDivElement | null;
-    if (!el) return;
-    el.scrollBy({ left: offset, behavior: "smooth" });
-  }
-
   return (
     <div className="relative">
       <div className="flex items-center justify-between mb-4">
@@ -39,30 +33,15 @@ export default function ProjectCarousel() {
       </div>
 
       <div className="overflow-hidden relative">
-        <button aria-hidden className="carousel-arrow left" onClick={() => scrollByOffset(-380)} title="Previous">
-          <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.96 }} className="p-2 rounded-full bg-accent-soft border border-default">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </motion.div>
-        </button>
-
-        <button aria-hidden className="carousel-arrow right" onClick={() => scrollByOffset(380)} title="Next">
-          <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.96 }} className="p-2 rounded-full bg-accent-soft border border-default">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </motion.div>
-        </button>
-
-        <motion.div ref={carouselRef} drag="x" dragConstraints={{ left: -900, right: 0 }} dragElastic={0.12} className="flex gap-6 py-4 cursor-grab overflow-x-auto" style={{ scrollBehavior: "smooth" }}>
+        <motion.div ref={carouselRef} drag="x" dragConstraints={{ left: -900, right: 0 }} dragElastic={0.12} className="flex gap-6 py-4 cursor-grab overflow-x-auto no-scrollbar carousel-track" style={{ scrollBehavior: "smooth" }}>
           {projects.map((p, i) => (
             <motion.article
               key={p.title}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.99 }}
               transition={{ type: "spring", stiffness: 220, damping: 18 }}
-              className="min-w-[280px] md:min-w-[420px] rounded-3xl p-6 glass-card border border-default shadow-2xl"
+              className="min-w-[280px] md:min-w-[420px] rounded-2xl border border-white/20 bg-white/40 dark:bg-black/40 backdrop-blur-md p-6 shadow-lg hover:shadow-2xl transition"
+              style={{ scrollSnapAlign: 'start' }}
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">

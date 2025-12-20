@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -23,9 +24,9 @@ export default function Navbar() {
       }
     }
 
-    function onScroll() {
-      setScrolled(window.scrollY > 8);
-    }
+      function onScroll() {
+        setScrolled(window.scrollY > 28);
+      }
 
     document.addEventListener("keydown", onKey);
     document.addEventListener("mousedown", onClick);
@@ -54,8 +55,8 @@ export default function Navbar() {
       className="fixed top-6 left-0 right-0 z-50"
       aria-label="Main navigation"
     >
-      <div className="mx-4 max-w-7xl mx-auto rounded-3xl overflow-hidden">
-        <div className={`w-full backdrop-blur-md transition-colors duration-300 border border-default ${scrolled ? "glass-card shadow-2xl" : "glass-card shadow-md"}`}>
+      <div className="mx-4 max-w-7xl mx-auto rounded-3xl overflow-visible relative">
+        <div style={{ background: "var(--page-bg)" }} className={`w-full transition-colors duration-300 border border-default ${scrolled ? "shadow-2xl backdrop-blur-sm" : "shadow-md"}`}>
           <div className="flex items-center justify-between px-6 py-4 md:py-5">
             <div className="flex items-center gap-5">
               <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-pink-500 shadow-lg flex items-center justify-center text-white font-semibold text-lg md:text-xl">IT</div>
@@ -88,13 +89,16 @@ export default function Navbar() {
                 );
               })}
 
-              <motion.a
-                href="#"
-                whileHover={{ scale: 1.04 }}
-                className="ml-4 inline-flex items-center gap-3 rounded-full btn-accent px-5 py-2 text-white text-sm font-semibold shadow-lg"
-              >
-                Get in touch
-              </motion.a>
+              <div className="flex items-center gap-3">
+                <ThemeToggle />
+                <motion.a
+                  href="#"
+                  whileHover={{ scale: 1.04 }}
+                  className="ml-1 inline-flex items-center gap-3 rounded-full btn-accent px-5 py-2 text-white text-sm font-semibold shadow-lg"
+                >
+                  Get in touch
+                </motion.a>
+              </div>
             </div>
 
             {/* Mobile button */}
@@ -117,6 +121,8 @@ export default function Navbar() {
               </motion.button>
             </div>
           </div>
+
+
 
           {/* Mobile panel */}
           <AnimatePresence>
